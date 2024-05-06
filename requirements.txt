@@ -14,5 +14,9 @@ torch-summary
 jupyterlab-lsp
 torchvision
 ipywidgets
+ray
 transformers
 datasets
+tqdm
+botorch
+jedi-language-server
