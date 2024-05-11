@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Use the current path for the source command
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo $CURRENT_DIR
@@ -77,3 +79,17 @@ if [ -f "$CURRENT_DIR/requirements.txt" ]; then
 fi
 
 echo "Libraries installed successfully."
+
+
+create_project_folders(){
+    # Create needed project folders 
+    echo "Creating project folders..."
+    mkdir -p "$CURRENT_DIR/results/gan_results"
+    mkdir -p "$CURRENT_DIR/results/cnn_results"
+}
+
+create_project_folders
+
+
+
+

@@ -165,4 +165,6 @@ linuxPythonVenv/
 .virtual_documents
 checkpoints/
 results/gan_results/*
-
+results/cnn_results/*
+managed_context/
+test_suite_analysis/
