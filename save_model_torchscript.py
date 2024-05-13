@@ -11,9 +11,10 @@ Goal: Generic modulation is next step -> Can load and handle an arbritrary model
 """
 
 # Add the checkpoint path and filename on the model you want to load in and save as a Torchscript for deployment
-checkpoint_dir = "./checkpoints" 
-file_name = "gan_checkpoint.pt"
+source_checkpoint_dir = "./checkpoints" 
+source_file_name = "gan_checkpoint.pt"
 target_filename = "gan_1st_script" 
+target_dir = "./torch_script_db" 
 
 n_channels = 3 
 
@@ -73,7 +74,7 @@ def load_checkpoint(checkpoint_path):
 
 
 def find_latest_checkpoint():
-    checkpoints = glob.glob(os.path.join(checkpoint_dir, file_name))
+    checkpoints = glob.glob(os.path.join(source_checkpoint_dir, source_file_name))
     if checkpoints: 
         # Use the OS metadata to recognize the latest file changed/added
         latest_checkpoint = max(checkpoints, key = os.path.getctime)
@@ -89,8 +90,12 @@ if latest_checkpoint:
     print("Checkpoint was found!")
     generator_state_dict_load = load_checkpoint(latest_checkpoint)
     generator.load_state_dict(generator_state_dict_load)
+    
+    os.makedirs(target_dir, exist_ok=True)
+    target_file_path = os.path.join(target_dir, target_filename)
+    
     model_scripted = torch.jit.script(generator)
-    model_scripted.save(target_filename)
+    model_scripted.save(target_file_path)
     
     # NOTE: When loading the script remember using the model.eval() 
     
