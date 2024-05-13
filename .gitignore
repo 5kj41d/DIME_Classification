@@ -168,3 +168,7 @@ results/gan_results/*
 results/cnn_results/*
 managed_context/
 test_suite_analysis/
+live_generated_images_gan/
+
+
+
